@@ -6,8 +6,10 @@
   </head>
   <body>
     <ul>
-      {{ range . }}
+    {{ range . }}
       <li>{{ . }}</li>
+    {{ else }}
+      <li> Nothing to show </li>
     {{ end }}
     </ul>
   </body>
