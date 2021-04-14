@@ -7,8 +7,10 @@
   <body>
     <div>The dot is {{ . }}</div>
     <div>
-    {{ with "world"}}
+    {{ with ""}}
       Now the dot is set to {{ . }}
+    {{ else }}
+      The dot is still {{ . }}
     {{ end }}
     </div>
     <div>The dot is {{ . }} again</div>
