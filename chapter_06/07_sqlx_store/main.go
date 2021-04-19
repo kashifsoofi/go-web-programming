@@ -9,9 +9,9 @@ import (
 )
 
 type Post struct {
-	Id      int
-	Content string
-	Author  string
+	Id         int
+	Content    string
+	AuthorName string `db:"author"`
 }
 
 var Db *sqlx.DB
@@ -38,7 +38,7 @@ func init() {
 // Create a new post
 func (post *Post) Create() (err error) {
 	sql := "insert into posts (content, author) values ($1, $2) returning id"
-	err = Db.QueryRow(sql, post.Content, post.Author).Scan(&post.Id)
+	err = Db.QueryRow(sql, post.Content, post.AuthorName).Scan(&post.Id)
 	return
 }
 
@@ -52,7 +52,7 @@ func GetPost(id int) (post Post, err error) {
 }
 
 func main() {
-	post := Post{Content: "Hello World!", Author: "Sau Sheong"}
+	post := Post{Content: "Hello World!", AuthorName: "Sau Sheong"}
 	post.Create()
 
 	// Get one post
