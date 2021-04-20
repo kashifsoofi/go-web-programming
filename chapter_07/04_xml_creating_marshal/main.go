@@ -4,7 +4,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
-	"os"
 )
 
 type Post struct { //#A
@@ -12,7 +11,6 @@ type Post struct { //#A
 	Id      string   `xml:"id,attr"`
 	Content string   `xml:"content"`
 	Author  Author   `xml:"author"`
-	Xml     string   `xml:"innerxml"`
 }
 
 type Author struct {
@@ -21,20 +19,24 @@ type Author struct {
 }
 
 func main() {
-	xmlFile, err := os.Open("post.xml")
-	if err != nil {
-		fmt.Println("Error opening XML file:", err)
-		return
-	}
-	defer xmlFile.Close()
-
-	xmlData, err := ioutil.ReadAll(xmlFile)
-	if err != nil {
-		fmt.Println("Error reading XML data:", err)
-		return
+	post := Post{
+		Id:      "1",
+		Content: "Hello World!",
+		Author: Author{
+			Id:   "2",
+			Name: "Sau Sheong",
+		},
 	}
 
-	var post Post
-	xml.Unmarshal(xmlData, &post)
-	fmt.Println(post)
+	output, err := xml.MarshalIndent(&post, "", "\t")
+	if err != nil {
+		fmt.Println("Error marshalling to XML:", err)
+		return
+	}
+
+	err = ioutil.WriteFile("created_post.xml", output, 0644)
+	if err != nil {
+		fmt.Println("Error writing XML to file:", err)
+		return
+	}
 }
