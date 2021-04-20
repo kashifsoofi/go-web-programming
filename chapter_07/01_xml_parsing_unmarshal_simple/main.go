@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-type Post struct { //#A
+type Post struct {
 	XMLName xml.Name `xml:"post"`
 	Id      string   `xml:"id,attr"`
 	Content string   `xml:"content"`
