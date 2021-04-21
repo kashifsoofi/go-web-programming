@@ -7,12 +7,12 @@
   },
   "comments" : [
     {
-      "id" : 3,
+      "id" : 1,
       "content" : "Have a great day!",
       "author" : "Adam"
     },
     {
-      "id" : 4,
+      "id" : 2,
       "content" : "How are you today?",
       "author" : "Betty"
     }
